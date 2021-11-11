@@ -2,6 +2,7 @@ import { Navigate } from "react-router";
 import React, { useEffect, useState } from "react";
 import { loginUrl } from "../../API/spotify";
 import "./Welcome.css";
+import MusicNotes from "../MusicNotes/MusicNotes";
 
 /*
 http://localhost:3000/#access_token=BQDYsWlB7jX3O1CObmkFJy2QdTbKYWiuEVQOWbBwaWk3tcq91W1EBqYHcswdNtzrHKvnSxFq0c3Xmksodi0v_rOBKBfLhS6jNJd9XOP9EtpQu5LHOFf4j_la_hgEaUuCaPQ1wQT4qA6hJDEqw86FiQSV35zx97jLxRXWm48_rTg8IFBsfOF_3tBEXRx_eQx3Dc_rczQ&token_type=Bearer&expires_in=3600
@@ -30,16 +31,15 @@ const Welcome: React.FC = () => {
   }
   return (
     <React.Fragment>
-      <div className="bg">
-        <div className="welcome">
-          <a href={loginUrl}>
-            <button className="btn">Sign in with Spotify</button>
-          </a>
-          <br />
-          <a href="/menu" className="nologin">
-            demo without signing in
-          </a>
-        </div>
+      <MusicNotes />
+      <div className="welcome">
+        <a href={loginUrl}>
+          <button className="btn">Sign in with Spotify</button>
+        </a>
+        <br />
+        <a href="/menu" className="nologin">
+          demo without signing in
+        </a>
       </div>
     </React.Fragment>
   );
