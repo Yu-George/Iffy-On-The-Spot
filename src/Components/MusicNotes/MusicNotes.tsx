@@ -1,6 +1,6 @@
 import React from "react";
 import "./MusicNotes.css";
-const MusicNotes = () => {
+const MusicNotes: React.FC = () => {
   return (
     <div className="muzieknootjes">
       <div className="noot-1">&#9835; &#9833;</div>

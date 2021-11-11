@@ -1,5 +1,5 @@
 import { Navigate } from "react-router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { loginUrl } from "../../API/spotify";
 import "./Welcome.css";
 import MusicNotes from "../MusicNotes/MusicNotes";
