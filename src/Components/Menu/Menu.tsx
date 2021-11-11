@@ -1,14 +1,14 @@
 import React from "react";
+interface prop {
+  tokenName: string;
+}
 
-const Menu = () => {
+const Menu = (token: prop) => {
   return (
-    <div>
-      <body>
-        <div className="welcome">
-          <button className="btn">Start the music!</button>
-          <br />
-        </div>
-      </body>
+    <div className="bg">
+      <div className="welcome">
+        <button className="btn">Start The Music!</button>
+      </div>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const App: React.FC = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Welcome />}></Route>
-          <Route path="/menu" element={<Menu />}></Route>
+          <Route path="/menu" element={<Menu tokenName="" />}></Route>
         </Routes>
       </Router>
     </React.Fragment>
