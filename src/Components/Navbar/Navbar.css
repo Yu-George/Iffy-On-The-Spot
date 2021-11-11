@@ -1,0 +1,28 @@
+.topnav {
+  font-size: 26px;
+  font-family: "Reaver", serif;
+  font-weight: 600;
+  letter-spacing: 3px;
+  opacity: 0.8;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 3 px 0 px;
+  margin: 0 px 20 px;
+  text-transform: uppercase;
+  border-top: 3 px solid transparent;
+  border-bottom: 3 px solid transparent;
+  background-color: black;
+  height: 45px;
+}
+.navelement {
+  padding-left: 15px;
+  text-decoration: none;
+  color: white;
+  opacity: 0.8;
+}
+
+.navelement:hover {
+  opacity: 1;
+}
