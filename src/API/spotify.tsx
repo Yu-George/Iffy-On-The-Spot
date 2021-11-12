@@ -7,6 +7,7 @@ const SCOPES = [
   "user-read-playback-state",
   "playlist-read-private",
   "user-library-read",
+  "user-read-recently-played",
 ];
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
 

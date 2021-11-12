@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactComponentElement, useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import ReactHowler from "react-howler";
 interface Song {
@@ -11,7 +11,9 @@ export interface SongData {
   songs: Song[];
 }
 const SAVED_TRACKS_ENDPOINT =
-  "https://api.spotify.com/v1/me/tracks?limit=30&offset=0";
+  "https://api.spotify.com/v1/me/tracks?limit=50&offset=0";
+const RECENTLY_PLAYED_ENDPOINT =
+  "https://api.spotify.com/v1/me/player/recently-played?limit=50";
 const Play: React.FC = () => {
   const [songList, setSongList] = useState<Song[]>([]);
   const handleArtist = (artists: any[]): string[] => {
@@ -32,15 +34,11 @@ const Play: React.FC = () => {
   useEffect(() => {
     if (sessionStorage.getItem("accessToken")) {
       const token = sessionStorage.getItem("accessToken");
-      sendSongListRequest(token, SAVED_TRACKS_ENDPOINT);
+      sendSongListRequest(token, RECENTLY_PLAYED_ENDPOINT);
     }
     return () => {};
   }, []);
-
-  const sendSongListRequest = (
-    token: string | null,
-    endpoint: string
-  ): null | string => {
+  const sendSongListRequest = (token: string | null, endpoint: string) => {
     axios
       .get(endpoint, {
         headers: {
@@ -53,7 +51,7 @@ const Play: React.FC = () => {
           const newSong: Song = parseSong(song);
           sl.push(newSong);
         });
-        setSongList(sl.concat(songList));
+        setSongList(sl);
       })
       .catch((err) => {
         console.log(err);
