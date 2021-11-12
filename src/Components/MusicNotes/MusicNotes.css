@@ -1,14 +1,15 @@
 .muzieknootjes {
   display: block;
   margin: auto;
-  position: relative;
+  position: absolute;
   width: 100%;
   min-width: 300px;
   height: 200px;
   border: 0px solid #000;
-  height: 95vh;
+  height: 100vh;
   background-color: black;
   color: white;
+  overflow: hidden;
 }
 
 .noot-1,
@@ -16,33 +17,40 @@
 .noot-3,
 .noot-4 {
   position: absolute;
-  animation: notes 2s infinite linear;
-  font-size: 10vh;
+  animation: notes 3s infinite linear;
+  font-size: 12vh;
   opacity: 0;
+  user-select: none;
 }
 
 .noot-1 {
   top: 60%;
   left: 0;
-  animation-delay: 0.5s;
+  animation-delay: 0.75s;
 }
 
 .noot-2 {
-  top: 30%;
+  top: 20%;
   left: 30%;
-  animation-delay: 1s;
+  animation-delay: 1.5s;
 }
 
 .noot-3 {
   top: 80%;
   left: 60%;
-  animation-delay: 1.5s;
+  animation-delay: 2.25s;
 }
 
 .noot-4 {
   top: 40%;
-  left: 90%;
-  animation-delay: 2s;
+  left: 85%;
+  animation-delay: 3s;
+}
+.noot-1:hover,
+.noot-2:hover,
+.noot-3:hover,
+.noot-4:hover {
+  color: #1db954;
 }
 
 @keyframes notes {

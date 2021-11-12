@@ -1,6 +1,8 @@
 import React, { ReactComponentElement, useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import ReactHowler from "react-howler";
+import MusicNotes from "../MusicNotes/MusicNotes";
+import "./Play.css";
 interface Song {
   songName: string;
   artist: string[];
@@ -10,10 +12,12 @@ interface Song {
 export interface SongData {
   songs: Song[];
 }
-const SAVED_TRACKS_ENDPOINT =
-  "https://api.spotify.com/v1/me/tracks?limit=50&offset=0";
-const RECENTLY_PLAYED_ENDPOINT =
-  "https://api.spotify.com/v1/me/player/recently-played?limit=50";
+
+const ENDPOINTS = [
+  "https://api.spotify.com/v1/me/tracks?limit=50&offset=0",
+  "https://api.spotify.com/v1/me/player/recently-played?limit=50",
+  "https://api.spotify.com/v1/me/top/tracks?limit=50",
+];
 const Play: React.FC = () => {
   const [songList, setSongList] = useState<Song[]>([]);
   const handleArtist = (artists: any[]): string[] => {
@@ -32,12 +36,27 @@ const Play: React.FC = () => {
     return array;
   }
   useEffect(() => {
-    if (sessionStorage.getItem("accessToken")) {
+    window.addEventListener("beforeunload", alertUser);
+    if (
+      sessionStorage.getItem("accessToken") ||
+      sessionStorage.getItem("mode")
+    ) {
       const token = sessionStorage.getItem("accessToken");
-      sendSongListRequest(token, RECENTLY_PLAYED_ENDPOINT);
+      const endIndex = Number(sessionStorage.getItem("mode"));
+      sendSongListRequest(token, ENDPOINTS[endIndex]);
+    } else {
+      window.location.assign("/");
     }
-    return () => {};
+    return () => {
+      window.removeEventListener("beforeunload", alertUser);
+    };
   }, []);
+
+  const alertUser = (e: any) => {
+    e.preventDefault();
+    e.returnValue = "";
+    window.location.assign("/");
+  };
   const sendSongListRequest = (token: string | null, endpoint: string) => {
     axios
       .get(endpoint, {
@@ -47,9 +66,9 @@ const Play: React.FC = () => {
       })
       .then((res) => {
         const sl: Song[] = [];
+        console.log(res.data.items[0]);
         res.data.items.forEach((song: any) => {
-          const newSong: Song = parseSong(song);
-          sl.push(newSong);
+          sl.push(parseSong(song));
         });
         setSongList(sl);
       })
@@ -60,16 +79,28 @@ const Play: React.FC = () => {
     return null;
   };
   const parseSong = (song: any): Song => {
-    const newSong: Song = {
-      songName: song.track.name,
-      artist: handleArtist(song.track.artists),
-      album: song.track.album.name,
-      previewUrl: song.track.preview_url,
-    };
+    let newSong: Song;
+    if (song.track) {
+      newSong = {
+        songName: song.track.name,
+        artist: handleArtist(song.track.artists),
+        album: song.track.album.name,
+        previewUrl: song.track.preview_url,
+      };
+    } else {
+      newSong = {
+        songName: song.name,
+        artist: handleArtist(song.artists),
+        album: song.album.name,
+        previewUrl: song.preview_url,
+      };
+    }
     return newSong;
   };
   return (
     <React.Fragment>
+      <MusicNotes />
+
       <MusicPlayer songs={shuffleArray(songList)} />
     </React.Fragment>
   );
@@ -78,28 +109,49 @@ const Play: React.FC = () => {
 const MusicPlayer = (data: SongData) => {
   const [audioState, setAudioState] = useState<boolean>(false);
   let [songIndex, setIndex] = useState<number>(0);
-  if (data.songs.length == 0) {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    e.returnValue = "";
+    alert("Submit");
+  };
+  if (data.songs.length === 0) {
     return <></>;
   } else {
     return (
       <React.Fragment>
-        {console.log(data.songs[songIndex].previewUrl + ".mp3")}
         <ReactHowler
           src={data.songs[songIndex].previewUrl}
           format={["mp3"]}
           html5={true}
           playing={audioState}
-          onEnd={() => setIndex((songIndex = songIndex + 1))}
+          onEnd={() => {
+            setIndex((songIndex = songIndex + 1));
+            setAudioState(false);
+          }}
         />
-        <header>
+        <header className="progress">
           {songIndex + 1} / {data.songs.length}
         </header>
-        <button onClick={() => setAudioState(!audioState)}>
-          {audioState ? "Pause" : "Play"}
-        </button>
-        <button onClick={() => setIndex((songIndex = songIndex + 1))}>
-          Skip
-        </button>
+        <form className="answer" onSubmit={handleSubmit}>
+          <input
+            id="answer"
+            type="text"
+            placeholder="Enter Your Answer"
+            minLength={3}
+          ></input>
+          <input type="submit" id="submit" className="btn"></input>
+        </form>
+        <div className="container">
+          <button className="btn" onClick={() => setAudioState(!audioState)}>
+            {audioState ? "Pause" : "Play"}
+          </button>
+          <button
+            className="btn skip"
+            onClick={() => setIndex((songIndex = songIndex + 1))}
+          >
+            Skip
+          </button>
+        </div>
       </React.Fragment>
     );
   }

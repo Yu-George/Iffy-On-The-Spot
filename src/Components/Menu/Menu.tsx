@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MusicNotes from "../MusicNotes/MusicNotes";
+import Play from "../Play/Play";
 interface prop {
-  tokenName: string;
+  updateMode: (data: number) => void;
 }
-const handlePlay = () => {
-  window.location.assign("/play");
-};
-const Menu: React.FC<prop> = (token: prop) => {
+const Menu: React.FC = () => {
+  const [mode, setMode] = useState<number>(-1);
+  useEffect(() => {
+    return () => {};
+  }, [mode]);
+  const handleMode = (num: number) => {
+    sessionStorage.setItem("mode", num.toString());
+    window.location.href = "/play";
+  };
   return (
     <React.Fragment>
       <MusicNotes />
       <div className="welcome">
-        <button className="btn" onClick={handlePlay}>
-          Start The Music!
+        <button className="btn" onClick={() => handleMode(0)}>
+          Saved Tracks
+        </button>
+        <button className="btn" onClick={() => handleMode(1)}>
+          Recently Played Tracks
+        </button>
+        <button className="btn" onClick={() => handleMode(2)}>
+          Most Played Tracks (6 months)
         </button>
       </div>
     </React.Fragment>

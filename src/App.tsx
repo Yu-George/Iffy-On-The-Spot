@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Welcome from "./Components/Welcome/Welcome";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -12,7 +12,7 @@ const App: React.FC = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Welcome />}></Route>
-          <Route path="/menu" element={<Menu tokenName="" />}></Route>
+          <Route path="/menu" element={<Menu />}></Route>
           <Route path="/play" element={<Play />}></Route>
         </Routes>
       </Router>

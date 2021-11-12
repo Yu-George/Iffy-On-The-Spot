@@ -3,20 +3,20 @@
   font-family: "Reaver", serif;
   font-weight: 600;
   letter-spacing: 3px;
-  opacity: 0.8;
   color: #fff;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 3 px 0 px;
+  padding: 15 px 5 px;
   margin: 0 px 20 px;
   text-transform: uppercase;
-  border-top: 3 px solid transparent;
-  border-bottom: 3 px solid transparent;
   background-color: black;
   height: 5vh;
+  position: absolute;
+  width: 100%;
 }
 .navelement {
+  z-index: 2;
   padding-left: 15px;
   text-decoration: none;
   color: white;
@@ -25,4 +25,10 @@
 
 .navelement:hover {
   opacity: 1;
+}
+
+.nav-help {
+  position: absolute;
+  right: 15px;
+  float: right;
 }
