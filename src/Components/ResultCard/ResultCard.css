@@ -10,24 +10,57 @@
 }
 
 .modalWrap {
+  --background: linear-gradient(
+    to top left,
+    hsl(152, 23%, 51%),
+    hsl(143, 85%, 39%)
+  );
   width: 800px;
-  height: 500px;
+  height: 800px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-  background: #fff;
-  color: #000;
+  background: var(--background);
+  color: hsl(163, 49%, 90%);
   display: grid;
   position: relative;
   z-index: 10;
   border-radius: 10px;
 }
 
+header {
+  font-size: 64px;
+}
 .modalContent {
+  margin: 10%;
   left: 50%;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   line-height: 1.8;
-  color: #141414;
+  color: hsl(163, 49%, 90%);
   text-align: center;
+}
+
+.modalBtn {
+  position: absolute;
+  top: 65vh;
+  left: 50%;
+  transform: translateX(-90px);
+  height: 60px;
+  width: 180px;
+  border: 1px solid hsl(143, 85%, 39%);
+  border-radius: 100rem;
+
+  color: hsl(143, 85%, 39%);
+  font-size: 1.4rem;
+  font-family: inherit;
+  letter-spacing: 0.2rem;
+
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.modalBtn:hover,
+.modalBtn:focus {
+  border-color: hsl(163, 49%, 90%);
+  background: hsl(163, 49%, 90%);
+  transform: translate(-90px, -3px);
 }

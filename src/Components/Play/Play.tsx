@@ -10,6 +10,7 @@ import Howler from "howler";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
 import ResultCard from "../ResultCard/ResultCard";
+import { FaPlay, FaPause } from "react-icons/fa";
 interface Song {
   songName: string;
   artist: string[];
@@ -136,7 +137,11 @@ const MusicPlayer = (data: SongData) => {
   } else {
     return (
       <React.Fragment>
-        <ResultCard showModal={showModal} setModal={setModal} />
+        <ResultCard
+          showModal={showModal}
+          setModal={setModal}
+          songData={data.songs[0]}
+        />
         <ReactHowler
           src={data.songs[songIndex].previewUrl}
           format={["mp3"]}
@@ -163,11 +168,14 @@ const MusicPlayer = (data: SongData) => {
           <input type="submit" id="submit" className="btn"></input>
         </form>
         <div className="container">
-          <button className="btn" onClick={() => setAudioState(!audioState)}>
-            {audioState ? "Pause" : "Play"}
+          <button
+            className="btn btn-ctrl"
+            onClick={() => setAudioState(!audioState)}
+          >
+            {audioState ? <FaPlay /> : <FaPause />}
           </button>
           <button
-            className="btn skip"
+            className="btn skip btn-ctrl"
             onClick={() => {
               setIndex(songIndex + 1);
               openModal();

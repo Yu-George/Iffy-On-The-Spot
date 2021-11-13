@@ -1,4 +1,11 @@
 .muzieknootjes {
+  --background: linear-gradient(
+    to right,
+    hsl(176, 29%, 20%),
+    hsl(143, 33%, 29%)
+  );
+  --shadow-1: hsla(236, 50%, 50%, 0.3);
+  --shadow-2: hsla(236, 50%, 50%, 0.4);
   display: block;
   margin: auto;
   position: absolute;
@@ -7,7 +14,7 @@
   height: 200px;
   border: 0px solid #000;
   height: 100vh;
-  background-color: black;
+  background: var(--background);
   color: white;
   overflow: hidden;
 }

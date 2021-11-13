@@ -1,24 +1,14 @@
-.btn {
-  font-family: "Open Sans", sans-serif;
-  background-color: #1db954;
-  text-decoration: none;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 800;
-  height: 80px;
-  border-radius: 40px;
-  border: #1db954;
-  padding: 20px;
-}
 .container {
   position: absolute;
   top: 60%;
   left: 50%;
   color: white;
   transform: translate(-50%, -50%);
+  height: 80px;
 }
 
 .skip {
+  margin-left: 50px;
   background-color: gray;
 }
 .answer {
@@ -36,7 +26,7 @@
   padding-left: 30px;
   padding-right: 30px;
   margin-left: 1vh;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 #submit:hover {
   opacity: 1;
@@ -60,6 +50,12 @@
   opacity: 0.8;
 }
 
+.btn-ctrl {
+  width: 80px;
+}
+.btn-ctrl:first-child {
+  font-size: 30px;
+}
 @media screen and (min-width: 480px) {
   .mobile-break {
     display: none;

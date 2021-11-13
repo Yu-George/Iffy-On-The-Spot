@@ -18,13 +18,16 @@ const Menu: React.FC = () => {
     <React.Fragment>
       <MusicNotes />
       <div className="welcome">
-        <button className="btn" onClick={() => handleMode(0)}>
+        <button
+          className="btn menu-card menu-card"
+          onClick={() => handleMode(0)}
+        >
           Saved Tracks
         </button>
-        <button className="btn" onClick={() => handleMode(1)}>
+        <button className="btn menu-card" onClick={() => handleMode(1)}>
           Recently Played Tracks
         </button>
-        <button className="btn" onClick={() => handleMode(2)}>
+        <button className="btn menu-card" onClick={() => handleMode(2)}>
           Most Played Tracks (6 months)
         </button>
       </div>
