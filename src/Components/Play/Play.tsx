@@ -1,9 +1,15 @@
-import React, { ReactComponentElement, useEffect, useState } from "react";
+import React, {
+  ReactComponentElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import axios, { AxiosResponse } from "axios";
 import ReactHowler from "react-howler";
 import Howler from "howler";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
+import ResultCard from "../ResultCard/ResultCard";
 interface Song {
   songName: string;
   artist: string[];
@@ -110,12 +116,17 @@ const Play: React.FC = () => {
 const MusicPlayer = (data: SongData) => {
   const [audioState, setAudioState] = useState<boolean>(false);
   const [songIndex, setIndex] = useState<number>(0);
-  const [answer, setAnswer] = useState("");
-  const [volume, setVolume] = useState(0.5);
+  const [answer, setAnswer] = useState<string>("");
+  const [volume, setVolume] = useState<number>(0.5);
+  const [showModal, setModal] = useState<boolean>(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
     alert(answer);
+  };
+
+  const openModal = () => {
+    setModal((prev) => !prev);
   };
   const handleAnswerChange = (e: any) => {
     setAnswer(e.target.value);
@@ -125,6 +136,7 @@ const MusicPlayer = (data: SongData) => {
   } else {
     return (
       <React.Fragment>
+        <ResultCard showModal={showModal} setModal={setModal} />
         <ReactHowler
           src={data.songs[songIndex].previewUrl}
           format={["mp3"]}
@@ -154,7 +166,13 @@ const MusicPlayer = (data: SongData) => {
           <button className="btn" onClick={() => setAudioState(!audioState)}>
             {audioState ? "Pause" : "Play"}
           </button>
-          <button className="btn skip" onClick={() => setIndex(songIndex + 1)}>
+          <button
+            className="btn skip"
+            onClick={() => {
+              setIndex(songIndex + 1);
+              openModal();
+            }}
+          >
             Skip
           </button>
         </div>
