@@ -1,35 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import Play from "../Play/Play";
-interface prop {
-  updateMode: (data: number) => void;
-}
+
 const Menu: React.FC = () => {
-  const [mode, setMode] = useState<number>(-1);
-  useEffect(() => {
-    return () => {};
-  }, [mode]);
-  const handleMode = (num: number) => {
-    sessionStorage.setItem("mode", num.toString());
-    window.location.href = "/play";
-  };
   return (
     <React.Fragment>
       <MusicNotes />
       <div className="welcome">
-        <button
-          className="btn menu-card menu-card"
-          onClick={() => handleMode(0)}
-        >
-          Saved Tracks
-        </button>
-        <button className="btn menu-card" onClick={() => handleMode(1)}>
-          Recently Played Tracks
-        </button>
-        <button className="btn menu-card" onClick={() => handleMode(2)}>
-          Most Played Tracks (6 months)
-        </button>
+        <Link to="/play" state={{ ind: 0 }}>
+          <button className="btn menu-card menu-card">Saved Tracks</button>
+        </Link>
+        <Link to="/play" state={{ ind: 1 }}>
+          <button className="btn menu-card">Recently Played Tracks</button>
+        </Link>
+        <Link to="/play" state={{ ind: 2 }}>
+          <button className="btn menu-card">
+            Most Played Tracks (6 months)
+          </button>
+        </Link>
       </div>
     </React.Fragment>
   );

@@ -11,6 +11,7 @@ import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
 import ResultCard from "../ResultCard/ResultCard";
 import { FaPlay, FaPause } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 export interface Song {
   songName: string;
@@ -22,14 +23,18 @@ export interface Song {
 export interface SongData {
   songs: Song[];
 }
-
+interface Mode {
+  ind: number;
+}
 const ENDPOINTS = [
   "https://api.spotify.com/v1/me/tracks?limit=50&offset=0",
   "https://api.spotify.com/v1/me/player/recently-played?limit=50",
   "https://api.spotify.com/v1/me/top/tracks?limit=50",
 ];
-const Play: React.FC = () => {
+const Play = () => {
   const [songList, setSongList] = useState<Song[]>([]);
+  const location = useLocation();
+  const mode: Mode = location.state;
   const handleArtist = (artists: any[]): string[] => {
     const aristList: string[] = [];
     artists.forEach((artist: any) => {
@@ -46,14 +51,11 @@ const Play: React.FC = () => {
     return array;
   }
   useEffect(() => {
+    console.log(mode);
     window.addEventListener("beforeunload", alertUser);
-    if (
-      sessionStorage.getItem("accessToken") ||
-      sessionStorage.getItem("mode")
-    ) {
+    if (sessionStorage.getItem("accessToken")) {
       const token = sessionStorage.getItem("accessToken");
-      const endIndex = Number(sessionStorage.getItem("mode"));
-      sendSongListRequest(token, endIndex);
+      sendSongListRequest(token, mode.ind);
     } else {
       window.location.assign("/");
     }

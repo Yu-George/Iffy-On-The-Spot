@@ -15,7 +15,7 @@
     hsl(152, 23%, 51%),
     hsl(143, 85%, 39%)
   );
-  width: 800px;
+  width: 600px;
   height: 800px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: var(--background);

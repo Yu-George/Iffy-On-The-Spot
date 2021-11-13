@@ -6,6 +6,10 @@ import Menu from "./Components/Menu/Menu";
 import Navbar from "./Components/Navbar/Navbar";
 import Play from "./Components/Play/Play";
 const App: React.FC = () => {
+  const [mode, setMode] = useState(-1);
+  const changeMode = (num: number) => {
+    setMode((prev) => num);
+  };
   return (
     <React.Fragment>
       <Router>
