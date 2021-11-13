@@ -1,6 +1,7 @@
 import React, { ReactComponentElement, useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import ReactHowler from "react-howler";
+import Howler from "howler";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
 interface Song {
@@ -110,6 +111,7 @@ const MusicPlayer = (data: SongData) => {
   const [audioState, setAudioState] = useState<boolean>(false);
   const [songIndex, setIndex] = useState<number>(0);
   const [answer, setAnswer] = useState("");
+  const [volume, setVolume] = useState(0.5);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
@@ -132,6 +134,7 @@ const MusicPlayer = (data: SongData) => {
             setIndex(songIndex + 1);
             setAudioState(false);
           }}
+          volume={volume}
         />
         <header className="progress">
           {songIndex + 1} / {data.songs.length}
