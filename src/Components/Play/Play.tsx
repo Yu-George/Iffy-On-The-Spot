@@ -108,11 +108,15 @@ const Play: React.FC = () => {
 
 const MusicPlayer = (data: SongData) => {
   const [audioState, setAudioState] = useState<boolean>(false);
-  let [songIndex, setIndex] = useState<number>(0);
+  const [songIndex, setIndex] = useState<number>(0);
+  const [answer, setAnswer] = useState("");
   const handleSubmit = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
-    alert("Submit");
+    alert(answer);
+  };
+  const handleAnswerChange = (e: any) => {
+    setAnswer(e.target.value);
   };
   if (data.songs.length === 0) {
     return <></>;
@@ -125,7 +129,7 @@ const MusicPlayer = (data: SongData) => {
           html5={true}
           playing={audioState}
           onEnd={() => {
-            setIndex((songIndex = songIndex + 1));
+            setIndex(songIndex + 1);
             setAudioState(false);
           }}
         />
@@ -137,18 +141,17 @@ const MusicPlayer = (data: SongData) => {
             id="answer"
             type="text"
             placeholder="Enter Your Answer"
-            minLength={3}
+            required
+            onChange={handleAnswerChange}
           ></input>
+          <br className="mobile-break" />
           <input type="submit" id="submit" className="btn"></input>
         </form>
         <div className="container">
           <button className="btn" onClick={() => setAudioState(!audioState)}>
             {audioState ? "Pause" : "Play"}
           </button>
-          <button
-            className="btn skip"
-            onClick={() => setIndex((songIndex = songIndex + 1))}
-          >
+          <button className="btn skip" onClick={() => setIndex(songIndex + 1)}>
             Skip
           </button>
         </div>

@@ -36,18 +36,13 @@
   padding-left: 30px;
   padding-right: 30px;
   margin-left: 1vh;
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
-#submit:invalid {
   opacity: 0.8;
 }
 #submit:hover {
   opacity: 1;
 }
 #answer {
-  width: 500px;
+  width: 30vw;
   height: 3vh;
   border-radius: 25px;
   border-color: white;
@@ -65,11 +60,23 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 480) {
-  #submit {
+@media screen and (min-width: 480px) {
+  .mobile-break {
     display: none;
   }
-  .btn {
-    background-color: red;
+}
+@media screen and (max-width: 480px) {
+  #answer {
+    width: 90vw;
+    height: 4vh;
+  }
+  #submit {
+    height: 35px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 5%);
+  }
+  .container {
+    top: 75%;
   }
 }
