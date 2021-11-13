@@ -20,28 +20,28 @@
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: var(--background);
   color: hsl(163, 49%, 90%);
-  display: grid;
-  position: relative;
   z-index: 10;
-  border-radius: 10px;
+  border-radius: 3%;
 }
 
-header {
-  font-size: 64px;
+h3 {
+  margin: 0;
 }
+header {
+  font-size: 48px;
+  margin: 0;
+}
+
 .modalContent {
   margin: 10%;
-  left: 50%;
-  justify-content: center;
   align-items: center;
-  line-height: 1.8;
   color: hsl(163, 49%, 90%);
   text-align: center;
 }
 
 .modalBtn {
   position: absolute;
-  top: 65vh;
+  top: 75vh;
   left: 50%;
   transform: translateX(-90px);
   height: 60px;

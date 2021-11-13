@@ -1,4 +1,4 @@
-.muzieknootjes {
+.musicnotes {
   --background: linear-gradient(
     to right,
     hsl(176, 29%, 20%),
@@ -19,10 +19,12 @@
   overflow: hidden;
 }
 
-.noot-1,
-.noot-2,
-.noot-3,
-.noot-4 {
+.note-1,
+.note-2,
+.note-3,
+.note-4,
+.note-5,
+.note-6 {
   position: absolute;
   animation: notes 3s infinite linear;
   font-size: 12vh;
@@ -30,34 +32,46 @@
   user-select: none;
 }
 
-.noot-1 {
-  top: 60%;
+.note-1 {
+  top: 80%;
   left: 0;
   animation-delay: 0.75s;
 }
 
-.noot-2 {
+.note-2 {
   top: 20%;
   left: 30%;
   animation-delay: 1.5s;
 }
 
-.noot-3 {
-  top: 80%;
+.note-3 {
+  top: 85%;
   left: 60%;
   animation-delay: 2.25s;
 }
 
-.noot-4 {
+.note-4 {
   top: 40%;
   left: 85%;
   animation-delay: 3s;
 }
-.noot-1:hover,
-.noot-2:hover,
-.noot-3:hover,
-.noot-4:hover {
-  color: #1db954;
+
+.note-5 {
+  top: 30%;
+  left: 20%;
+  animation-delay: 3.5s;
+}
+.note-6 {
+  top: 50%;
+  left: 55%;
+  animation-delay: 4s;
+}
+.note-1:hover,
+.note-2:hover,
+.note-3:hover,
+.note-4:hover,
+.note-5:hover .note-6:hover {
+  color: black;
 }
 
 @keyframes notes {

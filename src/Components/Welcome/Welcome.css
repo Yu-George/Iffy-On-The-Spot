@@ -20,6 +20,11 @@
   text-align: center;
 }
 
+img {
+  margin-top: 30px;
+  width: 400px;
+  height: 400px;
+}
 .menu-card {
   width: 20vw;
 }
@@ -29,21 +34,15 @@
   color: #1db954;
 }
 .btn:hover {
-  background-color: white;
-  border-color: #1db954;
-  color: #1db954;
+  animation-name: btn-hover;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
   transform: translateY(-5px);
 }
-#signin {
-  padding: 20px;
-  border-radius: 50px;
-  background-color: #1db954;
-  font-weight: 600;
-  color: white;
-  text-decoration: none;
-}
-#signin:hover {
-  background-color: white;
-  border-color: #1db954;
-  color: #1db954;
+
+@keyframes btn-hover {
+  100% {
+    background-color: white;
+    color: #1db954;
+  }
 }

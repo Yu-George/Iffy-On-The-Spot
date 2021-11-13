@@ -1,11 +1,6 @@
 import React from "react";
 import "./ResultCard.css";
-interface Song {
-  songName: string;
-  artist: string[];
-  album: string;
-  previewUrl: string;
-}
+import { Song } from "../Play/Play";
 
 interface props {
   showModal: boolean;
@@ -21,12 +16,9 @@ const ResultCard = (props: props) => {
           <div className="modalWrap">
             <div className="modalContent">
               <header>{props.songData.songName}</header>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex,
-              unde? Voluptatibus, dolore? Id ullam libero ad soluta saepe
-              obcaecati eveniet quia enim architecto quae aliquam qui ipsa
-              voluptates veritatis vero nemo quisquam, laborum tenetur quo!
-              Ratione odio quo ipsum magnam nam pariatur rem nesciunt placeat
-              velit. Neque soluta eaque pariatur.
+              <h3>By: {props.songData.artist.join(", ")}</h3>
+              <h3>{props.songData.album}</h3>
+              <img src={props.songData.albumImgUrl} />
               <button
                 className="modalBtn"
                 onClick={() => props.setModal((prev) => !prev)}

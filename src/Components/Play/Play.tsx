@@ -11,11 +11,13 @@ import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
 import ResultCard from "../ResultCard/ResultCard";
 import { FaPlay, FaPause } from "react-icons/fa";
-interface Song {
+
+export interface Song {
   songName: string;
   artist: string[];
   album: string;
   previewUrl: string;
+  albumImgUrl: string;
 }
 export interface SongData {
   songs: Song[];
@@ -51,7 +53,7 @@ const Play: React.FC = () => {
     ) {
       const token = sessionStorage.getItem("accessToken");
       const endIndex = Number(sessionStorage.getItem("mode"));
-      sendSongListRequest(token, ENDPOINTS[endIndex]);
+      sendSongListRequest(token, endIndex);
     } else {
       window.location.assign("/");
     }
@@ -65,18 +67,18 @@ const Play: React.FC = () => {
     e.returnValue = "";
     window.location.assign("/");
   };
-  const sendSongListRequest = (token: string | null, endpoint: string) => {
+  const sendSongListRequest = (token: string | null, ind: number) => {
     axios
-      .get(endpoint, {
+      .get(ENDPOINTS[ind], {
         headers: {
           Authorization: "Bearer " + token,
         },
       })
       .then((res) => {
         const sl: Song[] = [];
-        console.log(res.data.items[0]);
         res.data.items.forEach((song: any) => {
-          sl.push(parseSong(song));
+          if (ind != 2) song = song.track;
+          if (song.preview_url) sl.push(parseSong(song));
         });
         setSongList(sl);
       })
@@ -90,10 +92,11 @@ const Play: React.FC = () => {
     let newSong: Song;
     if (song.track) {
       newSong = {
-        songName: song.track.name,
-        artist: handleArtist(song.track.artists),
-        album: song.track.album.name,
-        previewUrl: song.track.preview_url,
+        songName: song.name,
+        artist: handleArtist(song.artists),
+        album: song.album.name,
+        previewUrl: song.preview_url,
+        albumImgUrl: song.album.images[0].url,
       };
     } else {
       newSong = {
@@ -101,6 +104,7 @@ const Play: React.FC = () => {
         artist: handleArtist(song.artists),
         album: song.album.name,
         previewUrl: song.preview_url,
+        albumImgUrl: song.album.images[0].url,
       };
     }
     return newSong;
@@ -108,7 +112,6 @@ const Play: React.FC = () => {
   return (
     <React.Fragment>
       <MusicNotes />
-
       <MusicPlayer songs={shuffleArray(songList)} />
     </React.Fragment>
   );
@@ -140,7 +143,7 @@ const MusicPlayer = (data: SongData) => {
         <ResultCard
           showModal={showModal}
           setModal={setModal}
-          songData={data.songs[0]}
+          songData={data.songs[songIndex - 1]}
         />
         <ReactHowler
           src={data.songs[songIndex].previewUrl}
@@ -172,7 +175,7 @@ const MusicPlayer = (data: SongData) => {
             className="btn btn-ctrl"
             onClick={() => setAudioState(!audioState)}
           >
-            {audioState ? <FaPlay /> : <FaPause />}
+            {!audioState ? <FaPlay /> : <FaPause />}
           </button>
           <button
             className="btn skip btn-ctrl"
