@@ -13,6 +13,11 @@ import ResultCard from "../ResultCard/ResultCard";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
+const ENDPOINTS = [
+  "https://api.spotify.com/v1/me/tracks?limit=50&offset=0",
+  "https://api.spotify.com/v1/me/player/recently-played?limit=50",
+  "https://api.spotify.com/v1/me/top/tracks?limit=50",
+];
 export interface Song {
   songName: string;
   artist: string[];
@@ -26,11 +31,6 @@ export interface SongData {
 interface Mode {
   ind: number;
 }
-const ENDPOINTS = [
-  "https://api.spotify.com/v1/me/tracks?limit=50&offset=0",
-  "https://api.spotify.com/v1/me/player/recently-played?limit=50",
-  "https://api.spotify.com/v1/me/top/tracks?limit=50",
-];
 const Play = () => {
   const [songList, setSongList] = useState<Song[]>([]);
   const location = useLocation();
@@ -51,7 +51,6 @@ const Play = () => {
     return array;
   }
   useEffect(() => {
-    console.log(mode);
     window.addEventListener("beforeunload", alertUser);
     if (sessionStorage.getItem("accessToken")) {
       const token = sessionStorage.getItem("accessToken");
@@ -125,10 +124,27 @@ const MusicPlayer = (data: SongData) => {
   const [answer, setAnswer] = useState<string>("");
   const [volume, setVolume] = useState<number>(0.5);
   const [showModal, setModal] = useState<boolean>(false);
+  const [score, setScore] = useState<number>(0);
+  const submitted = useRef<HTMLInputElement>(null);
+  const [isCorrect, setIsCorrect] = useState<boolean>(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
-    alert(answer);
+    submitAnswer();
+  };
+
+  const submitAnswer = () => {
+    if (answer.toLowerCase() == data.songs[songIndex].songName.toLowerCase()) {
+      setScore(score + 1);
+      setIsCorrect(true);
+    } else {
+      setIsCorrect(false);
+    }
+    setIndex(songIndex + 1);
+    setAudioState(false);
+    openModal();
+    setAnswer("");
+    if (submitted.current !== null) submitted.current.blur();
   };
 
   const openModal = () => {
@@ -146,20 +162,19 @@ const MusicPlayer = (data: SongData) => {
           showModal={showModal}
           setModal={setModal}
           songData={data.songs[songIndex - 1]}
+          isCorrect={isCorrect}
         />
         <ReactHowler
           src={data.songs[songIndex].previewUrl}
           format={["mp3"]}
           html5={true}
           playing={audioState}
-          onEnd={() => {
-            setIndex(songIndex + 1);
-            setAudioState(false);
-          }}
+          onEnd={() => submitAnswer()}
           volume={volume}
         />
         <header className="progress">
-          {songIndex + 1} / {data.songs.length}
+          Score: {score} <br />
+          {songIndex + 1}/{data.songs.length}
         </header>
         <form className="answer" onSubmit={handleSubmit}>
           <input
@@ -167,6 +182,8 @@ const MusicPlayer = (data: SongData) => {
             type="text"
             placeholder="Enter Your Answer"
             required
+            value={answer}
+            ref={submitted}
             onChange={handleAnswerChange}
           ></input>
           <br className="mobile-break" />
@@ -178,15 +195,6 @@ const MusicPlayer = (data: SongData) => {
             onClick={() => setAudioState(!audioState)}
           >
             {!audioState ? <FaPlay /> : <FaPause />}
-          </button>
-          <button
-            className="btn skip btn-ctrl"
-            onClick={() => {
-              setIndex(songIndex + 1);
-              openModal();
-            }}
-          >
-            Skip
           </button>
         </div>
       </React.Fragment>

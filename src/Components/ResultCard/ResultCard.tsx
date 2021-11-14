@@ -6,6 +6,7 @@ interface props {
   showModal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   songData: Song;
+  isCorrect: boolean;
 }
 
 const ResultCard = (props: props) => {
@@ -13,14 +14,15 @@ const ResultCard = (props: props) => {
     <>
       {props.showModal ? (
         <div className="modalbg">
-          <div className="modalWrap">
+          <div
+            className={props.isCorrect ? "modalWrap" : "modalWrap incorrect"}
+          >
             <div className="modalContent">
-              <header>{props.songData.songName}</header>
+              <h2>{props.songData.songName}</h2> <br />
               <h3>By: {props.songData.artist.join(", ")}</h3>
-              <h3>{props.songData.album}</h3>
               <img src={props.songData.albumImgUrl} />
               <button
-                className="modalBtn"
+                className={props.isCorrect ? "modalBtn" : "modalBtn btn-red"}
                 onClick={() => props.setModal((prev) => !prev)}
               >
                 Close

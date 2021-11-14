@@ -6,7 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: red;
+
+  z-index: 10;
 }
 
 .modalWrap {
@@ -24,11 +25,18 @@
   border-radius: 3%;
 }
 
+.incorrect {
+  --incorrectbackground: linear-gradient(
+    to top left,
+    hsl(0, 33%, 56%),
+    hsl(357, 68%, 48%)
+  );
+  background: var(--incorrectbackground);
+}
 h3 {
   margin: 0;
 }
-header {
-  font-size: 48px;
+h2 {
   margin: 0;
 }
 
@@ -56,6 +64,11 @@ header {
 
   transition: 0.2s;
   cursor: pointer;
+}
+
+.btn-red {
+  color: hsl(352, 85%, 39%);
+  border: 1px solid hsl(352, 85%, 39%);
 }
 
 .modalBtn:hover,

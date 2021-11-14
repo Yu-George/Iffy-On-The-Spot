@@ -70,7 +70,8 @@
 .note-2:hover,
 .note-3:hover,
 .note-4:hover,
-.note-5:hover .note-6:hover {
+.note-5:hover,
+.note-6:hover {
   color: black;
 }
 
