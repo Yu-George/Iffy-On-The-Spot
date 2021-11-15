@@ -20,7 +20,7 @@ const ResultCard = (props: props) => {
             <div className="modalContent">
               <h2>{props.songData.songName}</h2> <br />
               <h3>By: {props.songData.artist.join(", ")}</h3>
-              <img src={props.songData.albumImgUrl} />
+              <img src={props.songData.albumImgUrl} alt="albumImage" />
               <button
                 className={props.isCorrect ? "modalBtn" : "modalBtn btn-red"}
                 onClick={() => props.setModal((prev) => !prev)}

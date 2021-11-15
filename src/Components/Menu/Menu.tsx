@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MusicNotes from "../MusicNotes/MusicNotes";
-import Play from "../Play/Play";
 
 const Menu: React.FC = () => {
   return (

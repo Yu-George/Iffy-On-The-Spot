@@ -1,12 +1,6 @@
-import React, {
-  ReactComponentElement,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import axios, { AxiosResponse } from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import ReactHowler from "react-howler";
-import Howler from "howler";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
 import ResultCard from "../ResultCard/ResultCard";
@@ -78,7 +72,7 @@ const Play = () => {
       .then((res) => {
         const sl: Song[] = [];
         res.data.items.forEach((song: any) => {
-          if (ind != 2) song = song.track;
+          if (ind !== 2) song = song.track;
           if (song.preview_url) sl.push(parseSong(song));
         });
         setSongList(sl);
@@ -134,7 +128,7 @@ const MusicPlayer = (data: SongData) => {
   };
 
   const submitAnswer = () => {
-    if (answer.toLowerCase() == data.songs[songIndex].songName.toLowerCase()) {
+    if (answer.toLowerCase() === data.songs[songIndex].songName.toLowerCase()) {
       setScore(score + 1);
       setIsCorrect(true);
     } else {
@@ -184,6 +178,7 @@ const MusicPlayer = (data: SongData) => {
             required
             value={answer}
             ref={submitted}
+            autoComplete="off"
             onChange={handleAnswerChange}
           ></input>
           <br className="mobile-break" />

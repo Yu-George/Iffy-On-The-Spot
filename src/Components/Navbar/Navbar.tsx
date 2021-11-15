@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className="topnav">
       <Link className="navelement" to="/">
-        Logo
+        Iffy On The Spot
       </Link>
       <p className="navelement nav-help">Help</p>
     </div>
