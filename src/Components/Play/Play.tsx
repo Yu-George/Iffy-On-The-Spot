@@ -7,7 +7,7 @@ import "./Play.css";
 import ResultCard from "../ResultCard/ResultCard";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
-
+import { loginUrl } from "../../API/spotify";
 const ENDPOINTS = [
   "https://api.spotify.com/v1/me/tracks?limit=50&offset=0",
   "https://api.spotify.com/v1/me/player/recently-played?limit=50",
@@ -61,7 +61,7 @@ const Play = () => {
   const alertUser = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
-    window.location.assign("/");
+    window.location.href = "/";
   };
   const sendSongListRequest = (token: string | null, ind: number) => {
     axios
@@ -79,10 +79,10 @@ const Play = () => {
         setSongList(sl);
       })
       .catch((err) => {
+        sessionStorage.clear();
+        window.location.href = loginUrl;
         console.log(err);
-        return null;
       });
-    return null;
   };
   const parseSong = (song: any): Song => {
     let newSong: Song;
@@ -123,6 +123,7 @@ const MusicPlayer = (data: SongData) => {
   const submitted = useRef<HTMLInputElement>(null);
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
@@ -207,11 +208,11 @@ const MusicPlayer = (data: SongData) => {
             required
             value={answer}
             ref={submitted}
-            /*onBlur={() => {
+            onBlur={() => {
               setTimeout(() => {
                 setSuggestions([]);
               }, 100);
-            }}*/
+            }}
             autoComplete="off"
             onChange={(e) => handleAnswerChange(e.target.value)}
           />

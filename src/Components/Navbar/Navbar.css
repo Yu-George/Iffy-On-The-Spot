@@ -32,3 +32,9 @@
   right: 1vw;
   float: right;
 }
+
+@media screen and (max-width: 480px) {
+  .navelement:first-child {
+    font-size: 12 !important;
+  }
+}

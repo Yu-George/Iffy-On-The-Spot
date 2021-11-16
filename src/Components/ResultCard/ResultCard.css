@@ -77,3 +77,14 @@ h2 {
   background: hsl(163, 49%, 90%);
   transform: translate(-90px, -3px);
 }
+
+@media screen and (max-width: 480px) {
+  .modalWrap {
+    width: 90vw;
+    height: 90vh;
+  }
+  img {
+    width: 70vw;
+    height: 40vh;
+  }
+}
