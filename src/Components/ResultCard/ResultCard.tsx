@@ -11,6 +11,9 @@ interface props {
 }
 
 const ResultCard = (props: props) => {
+  const index =
+    props.songData.length - 2 === props.index ? props.index + 1 : props.index;
+  console.log(props.songData.length - 1, props.index);
   return (
     <>
       {props.showModal ? (
@@ -19,12 +22,9 @@ const ResultCard = (props: props) => {
             className={props.isCorrect ? "modalWrap" : "modalWrap incorrect"}
           >
             <div className="modalContent">
-              <h2>{props.songData[props.index].songName}</h2> <br />
-              <h3>By: {props.songData[props.index].artist.join(", ")}</h3>
-              <img
-                src={props.songData[props.index].albumImgUrl}
-                alt="albumImage"
-              />
+              <h2>{props.songData[index].songName}</h2> <br />
+              <h3>By: {props.songData[index].artist.join(", ")}</h3>
+              <img src={props.songData[index].albumImgUrl} alt="albumImage" />
               <button
                 className={props.isCorrect ? "modalBtn" : "modalBtn btn-red"}
                 onClick={() => props.setModal((prev) => !prev)}
