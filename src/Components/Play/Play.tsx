@@ -5,7 +5,15 @@ import ReactHowler from "react-howler";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
 import ResultCard from "../ResultCard/ResultCard";
-import { FaPlay, FaPause, FaArrowRight } from "react-icons/fa";
+import {
+  FaPlay,
+  FaPause,
+  FaArrowRight,
+  FaVolumeUp,
+  FaVolumeDown,
+  FaVolumeMute,
+  FaVolumeOff,
+} from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import { loginUrl } from "../../API/spotify";
 const ENDPOINTS = [
@@ -61,7 +69,7 @@ const Play = () => {
   const alertUser = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
-    window.location.href = "/";
+    sessionStorage.clear();
   };
   const sendSongListRequest = (token: string | null, ind: number) => {
     axios
@@ -123,6 +131,7 @@ const MusicPlayer = (data: SongData) => {
   const submitted = useRef<HTMLInputElement>(null);
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [mute, setMute] = useState<boolean>(false);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -137,8 +146,8 @@ const MusicPlayer = (data: SongData) => {
     } else {
       setIsCorrect(false);
     }
-    setIndex(songIndex + 1);
     setAudioState(false);
+    setIndex(songIndex + 1);
     openModal();
     setAnswer("");
     if (submitted.current !== null) submitted.current.blur();
@@ -194,6 +203,7 @@ const MusicPlayer = (data: SongData) => {
           playing={audioState}
           onEnd={() => submitAnswer()}
           volume={volume}
+          mute={mute}
         />
         <header className="progress">
           Score: {score} <br />
@@ -241,15 +251,27 @@ const MusicPlayer = (data: SongData) => {
           >
             {!audioState ? <FaPlay /> : <FaPause />}
           </button>
-
-          <input
-            type="range"
-            min="0"
-            max="100"
-            defaultValue="50"
-            className="slider"
-            onChange={(e) => setVolume(Number(e.target.value) / 100)}
-          ></input>
+          <div className="volume-ctrl">
+            {mute ? (
+              <FaVolumeMute onClick={() => setMute(!mute)} />
+            ) : volume !== 0 ? (
+              <FaVolumeDown onClick={() => setMute(!mute)} />
+            ) : (
+              <FaVolumeOff />
+            )}
+            <input
+              type="range"
+              min="0"
+              max="100"
+              defaultValue="50"
+              className="slider"
+              onChange={(e) => {
+                setVolume(Number(e.target.value) / 100);
+                setMute(false);
+              }}
+            ></input>
+            <FaVolumeUp />
+          </div>
         </div>
       </React.Fragment>
     );

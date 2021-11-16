@@ -79,6 +79,9 @@
 .suggestions:hover {
   background-color: hsl(143, 59%, 49%);
 }
+.volume-ctrl {
+  font-size: 18px;
+}
 @media screen and (min-width: 769px) {
   .mobile-break {
     display: none;

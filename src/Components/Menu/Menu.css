@@ -17,7 +17,7 @@
   border-radius: 5%;
   text-align: center;
   font-family: "Open Sans", sans-serif;
-  text-decoration: none;
+  text-decoration: none !important;
   text-transform: uppercase;
   font-weight: 800;
   color: white;
@@ -28,7 +28,7 @@
   opacity: 1;
   animation-name: menu-card-hover;
   animation-fill-mode: forwards;
-  animation-duration: 1s;
+  animation-duration: 1 s;
   transform: translateY(-5px);
 }
 
