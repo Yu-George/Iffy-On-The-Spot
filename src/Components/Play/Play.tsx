@@ -207,25 +207,27 @@ const MusicPlayer = (data: SongData) => {
             required
             value={answer}
             ref={submitted}
-            onBlur={() => {
+            /*onBlur={() => {
               setTimeout(() => {
                 setSuggestions([]);
               }, 100);
-            }}
+            }}*/
             autoComplete="off"
             onChange={(e) => handleAnswerChange(e.target.value)}
           />
-          {suggestions.slice(0, 5).map((sug, i) => {
-            return (
-              <div
-                className="suggestions"
-                onClick={() => onSuggestHandler(sug)}
-                key={i}
-              >
-                {sug}
-              </div>
-            );
-          })}
+          <div className="autocomplete">
+            {suggestions.slice(0, 5).map((sug, i) => {
+              return (
+                <div
+                  className="suggestions"
+                  onClick={() => onSuggestHandler(sug)}
+                  key={i}
+                >
+                  {sug}
+                </div>
+              );
+            })}
+          </div>
           <br className="mobile-break" />
           <input type="submit" id="submit" className="btn"></input>
         </form>

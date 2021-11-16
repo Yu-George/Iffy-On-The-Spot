@@ -46,7 +46,11 @@
   font-weight: 800;
   opacity: 0.8;
 }
-
+.autocomplete {
+  position: absolute;
+  width: 30vw;
+  z-index: 5;
+}
 .btn-ctrl {
   width: 80px;
 }
@@ -71,7 +75,8 @@
   }
 }
 @media screen and (max-width: 480px) {
-  #answer {
+  #answer,
+  .autocomplete {
     width: 90vw;
     height: 4vh;
   }
