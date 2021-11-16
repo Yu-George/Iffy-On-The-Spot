@@ -147,8 +147,9 @@ const MusicPlayer = (data: SongData) => {
       setIsCorrect(false);
     }
     setAudioState(false);
-    setIndex(songIndex + 1);
+    if (data.songs.length - 1 > songIndex) setIndex(songIndex + 1);
     openModal();
+    console.log(songIndex, data.songs.length);
     setAnswer("");
     if (submitted.current !== null) submitted.current.blur();
   };
@@ -162,8 +163,7 @@ const MusicPlayer = (data: SongData) => {
       matches = removeDupe(
         data.songs
           .filter((song) => {
-            const regex = new RegExp(`${text}`, "gi");
-            return song.songName.match(regex);
+            return song.songName.toLowerCase().includes(text);
           })
           .map((song) => {
             return song.songName;
@@ -181,7 +181,6 @@ const MusicPlayer = (data: SongData) => {
     });
   }
   const onSuggestHandler = (text: string) => {
-    console.log("yay");
     setAnswer(text);
     setSuggestions([]);
   };
@@ -193,8 +192,9 @@ const MusicPlayer = (data: SongData) => {
         <ResultCard
           showModal={showModal}
           setModal={setModal}
-          songData={data.songs[songIndex - 1]}
+          songData={data.songs}
           isCorrect={isCorrect}
+          index={songIndex - 1}
         />
         <ReactHowler
           src={data.songs[songIndex].previewUrl}
