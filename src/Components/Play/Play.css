@@ -89,10 +89,12 @@
   .autocomplete {
     width: 80vw;
     height: 4vh;
-    padding-left: 0px;
+    margin: 0px;
+    padding: 0px;
   }
   #submit {
-    width: 3vw;
+    margin: 0px;
+    width: 2vw;
     height: 4.5vh;
   }
   .container {

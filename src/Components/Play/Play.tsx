@@ -80,7 +80,7 @@ const Play = () => {
       })
       .catch((err) => {
         sessionStorage.clear();
-        window.location.href = loginUrl;
+        window.location.assign("/");
         console.log(err);
       });
   };
