@@ -4,15 +4,21 @@
   left: 50%;
   color: white;
   transform: translate(-50%, -50%);
-  height: 80px;
+  height: 15 vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .answer {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   white-space: nowrap;
+  align-content: center;
+  justify-content: center;
 }
 
 #submit {
@@ -23,6 +29,7 @@
   padding-right: 30px;
   margin-left: 1vh;
   opacity: 0.9;
+  cursor: pointer;
 }
 #submit:hover {
   opacity: 1;
@@ -38,7 +45,7 @@
 .progress {
   font-family: "Reaver", serif;
   position: absolute;
-  top: 10%;
+  top: 5%;
   color: white;
   width: 100%;
   font-size: 26px;
@@ -53,11 +60,14 @@
 }
 .btn-ctrl {
   width: 80px;
-}
-.btn-ctrl:first-child {
+  padding-bottom: 2vh;
   font-size: 30px;
 }
 
+.slider {
+  margin-top: 2vh;
+  width: 15vw;
+}
 .suggestions {
   cursor: pointer;
   border-right: 1px solid black;
@@ -77,16 +87,18 @@
 @media screen and (max-width: 768px) {
   #answer,
   .autocomplete {
-    width: 90vw;
+    width: 80vw;
     height: 4vh;
+    padding-left: 0px;
   }
   #submit {
-    height: 35px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 5%);
+    width: 3vw;
+    height: 4.5vh;
   }
   .container {
-    top: 75%;
+    top: 33%;
+  }
+  .slider {
+    width: 60vw;
   }
 }

@@ -5,7 +5,7 @@ import ReactHowler from "react-howler";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
 import ResultCard from "../ResultCard/ResultCard";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { FaPlay, FaPause, FaArrowRight } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import { loginUrl } from "../../API/spotify";
 const ENDPOINTS = [
@@ -229,8 +229,9 @@ const MusicPlayer = (data: SongData) => {
               );
             })}
           </div>
-          <br className="mobile-break" />
-          <input type="submit" id="submit" className="btn"></input>
+          <button type="submit" id="submit" className="btn">
+            <FaArrowRight />
+          </button>
         </form>
 
         <div className="container">
@@ -240,6 +241,15 @@ const MusicPlayer = (data: SongData) => {
           >
             {!audioState ? <FaPlay /> : <FaPause />}
           </button>
+
+          <input
+            type="range"
+            min="0"
+            max="100"
+            defaultValue="50"
+            className="slider"
+            onChange={(e) => setVolume(Number(e.target.value) / 100)}
+          ></input>
         </div>
       </React.Fragment>
     );
