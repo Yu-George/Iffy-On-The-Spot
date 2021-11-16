@@ -1,6 +1,6 @@
 .container {
   position: absolute;
-  top: 60%;
+  top: 30%;
   left: 50%;
   color: white;
   transform: translate(-50%, -50%);
@@ -52,6 +52,18 @@
 }
 .btn-ctrl:first-child {
   font-size: 30px;
+}
+
+.suggestions {
+  cursor: pointer;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  background-color: hsl(167, 24%, 93%);
+  height: 30px;
+}
+.suggestions:hover {
+  background-color: hsl(143, 59%, 49%);
 }
 @media screen and (min-width: 480px) {
   .mobile-break {

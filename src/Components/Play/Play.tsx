@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import Downshift from "downshift";
 import ReactHowler from "react-howler";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Play.css";
@@ -121,6 +122,7 @@ const MusicPlayer = (data: SongData) => {
   const [score, setScore] = useState<number>(0);
   const submitted = useRef<HTMLInputElement>(null);
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
@@ -144,8 +146,34 @@ const MusicPlayer = (data: SongData) => {
   const openModal = () => {
     setModal((prev) => !prev);
   };
-  const handleAnswerChange = (e: any) => {
-    setAnswer(e.target.value);
+  const handleAnswerChange = (text: string) => {
+    let matches: string[] = [];
+    if (text.length > 0) {
+      matches = removeDupe(
+        data.songs
+          .filter((song) => {
+            const regex = new RegExp(`${text}`, "gi");
+            return song.songName.match(regex);
+          })
+          .map((song) => {
+            return song.songName;
+          })
+      );
+    }
+    setSuggestions(matches);
+    setAnswer(text);
+  };
+
+  // fun remove dupe solution from https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array
+  function removeDupe(a: any[]) {
+    return a.sort().filter(function (item, pos, ary) {
+      return !pos || item != ary[pos - 1];
+    });
+  }
+  const onSuggestHandler = (text: string) => {
+    console.log("yay");
+    setAnswer(text);
+    setSuggestions([]);
   };
   if (data.songs.length === 0) {
     return <></>;
@@ -170,6 +198,7 @@ const MusicPlayer = (data: SongData) => {
           Score: {score} <br />
           {songIndex + 1}/{data.songs.length}
         </header>
+
         <form className="answer" onSubmit={handleSubmit}>
           <input
             id="answer"
@@ -178,12 +207,29 @@ const MusicPlayer = (data: SongData) => {
             required
             value={answer}
             ref={submitted}
+            onBlur={() => {
+              setTimeout(() => {
+                setSuggestions([]);
+              }, 100);
+            }}
             autoComplete="off"
-            onChange={handleAnswerChange}
-          ></input>
+            onChange={(e) => handleAnswerChange(e.target.value)}
+          />
+          {suggestions.slice(0, 5).map((sug, i) => {
+            return (
+              <div
+                className="suggestions"
+                onClick={() => onSuggestHandler(sug)}
+                key={i}
+              >
+                {sug}
+              </div>
+            );
+          })}
           <br className="mobile-break" />
           <input type="submit" id="submit" className="btn"></input>
         </form>
+
         <div className="container">
           <button
             className="btn btn-ctrl"

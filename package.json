@@ -15,6 +15,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.3.2",
     "axios": "^0.24.0",
+    "downshift": "^6.1.7",
     "howler": "^2.2.3",
     "react": "^17.0.2",
     "react-audio-spectrum": "^0.1.0",
