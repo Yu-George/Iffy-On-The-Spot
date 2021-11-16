@@ -8,14 +8,14 @@
 }
 .btn {
   font-family: "Open Sans", sans-serif;
-  background-color: #1db954;
   text-decoration: none;
-  color: #fff;
   text-transform: uppercase;
   font-weight: 800;
+  background-color: rgb(12, 175, 113);
+  color: #fff;
   height: 80px;
   border-radius: 40px;
-  border: #1db954;
+  border: rgb(12, 175, 113);
   padding: 20px;
   text-align: center;
 }
@@ -25,13 +25,10 @@ img {
   width: 400px;
   height: 400px;
 }
-.menu-card {
-  width: 20vw;
-}
 .nologin {
   padding: 16px;
-  text-decoration-color: #1db954;
-  color: #1db954;
+  text-decoration-color: rgb(12, 175, 113);
+  color: rgb(12, 175, 113);
 }
 .btn:hover {
   animation-name: btn-hover;
@@ -43,6 +40,6 @@ img {
 @keyframes btn-hover {
   100% {
     background-color: white;
-    color: #1db954;
+    color: rgb(12, 175, 113);
   }
 }

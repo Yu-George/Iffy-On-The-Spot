@@ -69,12 +69,12 @@
 .suggestions:hover {
   background-color: hsl(143, 59%, 49%);
 }
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 769px) {
   .mobile-break {
     display: none;
   }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   #answer,
   .autocomplete {
     width: 90vw;

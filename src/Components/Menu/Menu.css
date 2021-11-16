@@ -1,0 +1,44 @@
+.menu {
+  width: 100vw;
+  height: 30vh;
+  top: 35%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.menu-card {
+  margin: 1vw;
+  width: 30vw;
+  height: 30vh;
+  line-height: 30vh;
+  background-color: rgb(12, 175, 113);
+  border-radius: 5%;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: white;
+  opacity: 0.8;
+}
+
+.menu-card:hover {
+  background-color: rgb(97, 214, 169);
+  opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    height: 90vh;
+    top: 8%;
+    flex-direction: column;
+  }
+  .menu-card {
+    width: 90vw;
+    display: block;
+    height: 25vh;
+    line-height: 25vh;
+  }
+}
