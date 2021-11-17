@@ -1,0 +1,57 @@
+.result-bg {
+  --background: linear-gradient(
+    to right,
+    hsl(176, 29%, 20%),
+    hsl(143, 33%, 29%)
+  );
+  background: var(--background);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: absolute;
+  align-content: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+html {
+  background: var(--background);
+}
+.result-title {
+  font-size: 36px;
+  color: white;
+  top: 20vh;
+  font-weight: 900;
+  position: relative;
+  text-align: center;
+  background-color: inherit;
+}
+
+#table-header {
+  padding: 0px;
+}
+p {
+  font-weight: 100;
+  font-size: 24px;
+}
+
+.song-table {
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  font-size: 24px;
+  font-weight: 100;
+  color: hsl(132, 2%, 54%);
+  background-color: var(--background);
+}
+
+img {
+  width: 128px;
+  height: 128px;
+}
+th {
+  padding-bottom: 10px;
+  padding-right: 20px;
+}
+.song-entry {
+  color: white;
+}

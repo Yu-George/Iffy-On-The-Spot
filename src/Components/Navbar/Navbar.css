@@ -10,7 +10,7 @@
   padding: 15 px 5 px;
   margin: 0 px 20 px;
   text-transform: uppercase;
-  background-color: black;
+  background-color: transparent;
   height: 5vh;
   position: absolute;
   width: 100%;
@@ -34,7 +34,4 @@
 }
 
 @media screen and (max-width: 480px) {
-  .navelement:first-child {
-    font-size: 12 !important;
-  }
 }
