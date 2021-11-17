@@ -147,7 +147,7 @@ const MusicPlayer = (data: SongData) => {
       setIsCorrect(false);
     }
     setAudioState(false);
-    if (data.songs.length - 1 > songIndex) setIndex(songIndex + 1);
+    //  if (data.songs.length - 1 > songIndex) setIndex(songIndex + 1);
     openModal();
     console.log(songIndex, data.songs.length);
     setAnswer("");
@@ -194,7 +194,9 @@ const MusicPlayer = (data: SongData) => {
           setModal={setModal}
           songData={data.songs}
           isCorrect={isCorrect}
-          index={songIndex - 1}
+          index={songIndex}
+          score={score}
+          setIndex={setIndex}
         />
         <ReactHowler
           src={data.songs[songIndex].previewUrl}
