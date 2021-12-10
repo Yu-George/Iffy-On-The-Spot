@@ -1,6 +1,6 @@
 const CLIENT_ID = "0b27e5fcf04d44418616005eaed81e2e"; // insert your client id here from spotify
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/";
+const REDIRECT_URL_AFTER_LOGIN = "https://putonthespotify.netlify.app/";
 const SPACE_DELIMITER = "%20";
 const SCOPES = [
   "user-read-currently-playing",

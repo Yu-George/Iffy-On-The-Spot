@@ -19,7 +19,6 @@ const Navbar = () => {
       <Link className="navelement" to="/">
         {mobile ? "Iffy" : "Iffy On The Spot"}
       </Link>
-      <p className="navelement nav-help">Help</p>
     </div>
   );
 };
