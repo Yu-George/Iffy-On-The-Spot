@@ -13,9 +13,6 @@
   font-family: "Open Sans", sans-serif;
 }
 
-html {
-  background: var(--background);
-}
 .result-title {
   font-size: 36px;
   color: white;
@@ -44,7 +41,7 @@ p {
   background-color: var(--background);
 }
 
-img {
+#result-image {
   width: 128px;
   height: 128px;
 }
@@ -54,4 +51,8 @@ th {
 }
 .song-entry {
   color: white;
+}
+
+.back {
+  top: 30px;
 }

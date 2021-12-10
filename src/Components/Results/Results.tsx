@@ -3,6 +3,7 @@ import React from "react";
 import { Song } from "../Play/Play";
 import MusicNotes from "../MusicNotes/MusicNotes";
 import "./Results.css";
+import { Link } from "react-router-dom";
 interface ResultProps {
   score: number;
   songs: Song[];
@@ -18,7 +19,7 @@ const Results = () => {
           of {props.songs.length}
           <p> Here are the songs you played:</p>
           <table className="song-table">
-            <tr>
+            <tr id="table-header">
               <th> Album </th>
               <th> Song </th>
               <th> Artist </th>
@@ -27,13 +28,23 @@ const Results = () => {
               return (
                 <tr className="song-entry">
                   <th>
-                    <img src={song.albumImgUrl}></img>
+                    <img
+                      alt="albumimg"
+                      id="result-image"
+                      src={song.albumImgUrl}
+                    ></img>
                   </th>
                   <th>{song.songName}</th>
                   <th>{song.artist.join(", ")}</th>
                 </tr>
               );
             })}
+            <tr>
+              <th></th>
+              <Link to="/">
+                <button className="btn"> BACK </button>
+              </Link>
+            </tr>
           </table>
         </div>
       </div>

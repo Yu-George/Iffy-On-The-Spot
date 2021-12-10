@@ -15,7 +15,7 @@ import {
   FaVolumeOff,
 } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
-import { loginUrl } from "../../API/spotify";
+import sampleSongs from "./SampleSongs";
 const ENDPOINTS = [
   "https://api.spotify.com/v1/me/tracks?limit=50&offset=0",
   "https://api.spotify.com/v1/me/player/recently-played?limit=50",
@@ -55,8 +55,9 @@ const Play = () => {
   }
   useEffect(() => {
     window.addEventListener("beforeunload", alertUser);
-    if (sessionStorage.getItem("accessToken")) {
-      const token = sessionStorage.getItem("accessToken");
+    let token;
+    if (sessionStorage.getItem("accessToken") || mode.ind >= 3) {
+      token = sessionStorage.getItem("accessToken");
       sendSongListRequest(token, mode.ind);
     } else {
       window.location.assign("/");
@@ -72,26 +73,32 @@ const Play = () => {
     sessionStorage.clear();
   };
   const sendSongListRequest = (token: string | null, ind: number) => {
-    axios
-      .get(ENDPOINTS[ind], {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        const sl: Song[] = [];
-        res.data.items.forEach((song: any) => {
-          if (ind !== 2) song = song.track;
-          if (song.preview_url) sl.push(parseSong(song));
+    if (ind >= 3) {
+      setSongList(sampleSongs.sampleSongs.genre[ind - 3]);
+    } else {
+      axios
+        .get(ENDPOINTS[ind], {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          const sl: Song[] = [];
+          res.data.items.forEach((song: any) => {
+            if (ind !== 2) song = song.track;
+            if (song.preview_url) sl.push(parseSong(song));
+          });
+          setSongList(sl);
+          console.log(songList);
+        })
+        .catch((err) => {
+          sessionStorage.clear();
+          window.location.assign("/");
+          console.log(err);
         });
-        setSongList(sl);
-      })
-      .catch((err) => {
-        sessionStorage.clear();
-        window.location.assign("/");
-        console.log(err);
-      });
+    }
   };
+
   const parseSong = (song: any): Song => {
     let newSong: Song;
     if (song.track) {
@@ -147,9 +154,8 @@ const MusicPlayer = (data: SongData) => {
       setIsCorrect(false);
     }
     setAudioState(false);
-    //  if (data.songs.length - 1 > songIndex) setIndex(songIndex + 1);
     openModal();
-    console.log(songIndex, data.songs.length);
+    console.log(data.songs);
     setAnswer("");
     if (submitted.current !== null) submitted.current.blur();
   };
