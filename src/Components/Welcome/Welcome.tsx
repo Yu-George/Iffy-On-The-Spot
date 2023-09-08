@@ -4,10 +4,6 @@ import { loginUrl } from "../../API/spotify";
 import "./Welcome.css";
 import MusicNotes from "../MusicNotes/MusicNotes";
 
-/*
-http://localhost:3000/#access_token=BQDYsWlB7jX3O1CObmkFJy2QdTbKYWiuEVQOWbBwaWk3tcq91W1EBqYHcswdNtzrHKvnSxFq0c3Xmksodi0v_rOBKBfLhS6jNJd9XOP9EtpQu5LHOFf4j_la_hgEaUuCaPQ1wQT4qA6hJDEqw86FiQSV35zx97jLxRXWm48_rTg8IFBsfOF_3tBEXRx_eQx3Dc_rczQ&token_type=Bearer&expires_in=3600
-*/
-
 //params are separated by &, key and value are separated by =
 const parseParams = (hash: string): string => {
   const tokenString: string = hash.split("&")[0].split("=")[1];
